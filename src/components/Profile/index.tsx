@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 
 import { Avatar } from "../Avatar";
 
-import { styles } from "./style";
+import { styles } from "./styles";
 
 export function Profile() {
   return (
