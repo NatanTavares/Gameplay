@@ -1,40 +1,51 @@
 import React from "react";
-import { View, Text, Image, StatusBar } from "react-native";
+import { View, Text, Image, Alert, ActivityIndicator } from "react-native";
+import { useAuth } from "../../hooks/useAuth";
 
+import { Background } from "../../components/Background";
 import { ButtonIcon } from "../../components/ButtonIcon";
 
 import IllustrationImg from "../../assets/illustration.png";
+import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
 export function SignIn() {
+  const { loading, onSignIn } = useAuth();
+
+  async function handleSignIn() {
+    try {
+      await onSignIn();
+    } catch (error) {
+      Alert.alert(error);
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+    <Background>
+      <View style={styles.container}>
+        <Image
+          source={IllustrationImg}
+          style={styles.image}
+          resizeMode="stretch"
+        />
 
-      <Image
-        source={IllustrationImg}
-        style={styles.image}
-        resizeMode="stretch"
-      />
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Conecte-se{"\n"}e organize suas{"\n"}jogatinas
+          </Text>
 
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Organize {`\n`}
-          suas jogatinas {`\n`}
-          facilmente
-        </Text>
+          <Text style={styles.subtitle}>
+            Crie grupos para jogar seus games{"\n"}
+            favoritos com seus amigos
+          </Text>
 
-        <Text style={styles.subtitle}>
-          Crie grupos para jogar seus games {`\n`}
-          favoritos com seus amigos
-        </Text>
-
-        <ButtonIcon title="Entrar com Discord" activeOpacity={0.7} />
+          {loading ? (
+            <ActivityIndicator color={theme.colors.primary} />
+          ) : (
+            <ButtonIcon title="Entrar com Discord" onPress={handleSignIn} />
+          )}
+        </View>
       </View>
-    </View>
+    </Background>
   );
 }
