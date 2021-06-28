@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: "center",
+    marginLeft: 20,
   },
   title: {
     marginBottom: 4,
@@ -19,7 +20,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.heading,
   },
   subtitle: {
-    marginBottom: 12,
     fontSize: 13,
     fontFamily: theme.fonts.text400,
     color: theme.colors.highlight,
