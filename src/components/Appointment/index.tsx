@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 
+import { AppointmentType } from "../../@types/global/appointment";
 import { GuildType } from "../../@types/global/guild";
 import { categories } from "../../utils/categories";
 
@@ -12,14 +13,6 @@ import { theme } from "../../global/styles/theme";
 import PlayerSvg from "../../assets/player.svg";
 import CalendarSvg from "../../assets/calendar.svg";
 import { styles } from "./styles";
-
-type AppointmentType = {
-  id: string;
-  guild: GuildType;
-  category: string;
-  date: string;
-  description: string;
-};
 
 type AppointmentProps = RectButtonProps & {
   data: AppointmentType;
@@ -37,13 +30,13 @@ export function Appointment({ data, ...rest }: AppointmentProps) {
           style={styles.guildContainer}
           colors={[secondary50, secondary70]}
         >
-          <GuildIcon />
+          <GuildIcon guildId={data.guild.id} iconId={data.guild.icon} />
         </LinearGradient>
 
         <View style={styles.content}>
           <View style={styles.header}>
             <Text style={styles.title}>{data.guild.name}</Text>
-            <Text style={styles.category}>{category.title}</Text>
+            <Text style={styles.category}>{category?.title}</Text>
           </View>
 
           <View style={styles.footer}>
