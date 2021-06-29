@@ -1,16 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+import { MemberType } from "../../@types/global/member";
+
 import { Avatar } from "../Avatar";
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
 
-type MemberProps = {
-  username: string;
-  avatar_url: string;
-  isOnline?: boolean;
-};
+type MemberProps = MemberType;
 
 export function Member({
   username,
